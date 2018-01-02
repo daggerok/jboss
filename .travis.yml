@@ -9,20 +9,6 @@ env:
   - TERM=dumb
   - DOCKER_USERNAME=daggerok
   - secure: "sEB0x6YGTyk2BOL8EzGIjWa1fLWMVumubnSEheH/sJTWn7DCmQixtT8LqIW0M42ruWOUk2wd4vpxBaDZFnKnIbnK5u7wr7Ozk+eXLStQeL2GR9phSqEfqMPCVMv/hN/qQfg1sYegzFhz241vTd1JV87ypwDEqOTqV/fe0siD39CRv9Jx1sVf5wAPJN3K0EvCQ57BdeWmcu93BIbzIxA0sCyU9NwHma7MmpkRrkSOcMUGAlR1sGt6kWLPj3i2QkMDycS9OPo74CvJA4J7qpM9//aX8TvQFecPewZHqUGfuBsCXT+p/7rTzcAlHhYx2yhGeU7GNXYkHf5Z5i5w76Een9OTJbd5h7l9KFgrxEOJZMRYAAUhChvI+Omh3aNlUclVgVSrU5xlnYShN0ChWbXy8FNGiZ96YyDUjz92AMPsvtpuNReVGkZbAT4aVcOKw33NKtFD/FLurGjhgMnHm4ygHt6HiVJr5l3q+/NITved3MLpg3axL7WPxzax7yvrxV/QPSxXZJ6aVjVYjiqjXAqRN/sYf2PoAQbtyhSE485quO0ie1oj0TVx0dNDWCOe1sICQHDIqpS65StNbWOX/wqmS4Yq322k1kYYncGJdRnrGZTurkW8zhhPw4IDPbP/TrlUF9MmrYgukY6y2lrgs0Y+dKnQTSfq+HeHs5B+YwuQ97w="
-  # - DOCKER_COMPOSE_VERSION=1.18.0
-
-# before_install:
-#   # update docker
-#   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-#   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-#   - sudo apt update
-#   - sudo apt -y install docker-ce
-#   # update docker-compose
-#   - sudo rm -rf /usr/local/bin/docker-compose
-#   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-#   - chmod +x docker-compose
-#   - sudo mv docker-compose /usr/local/bin
-#   - docker-compose -v
 
 script:
 - docker build -t ${DOCKER_USERNAME}/jboss-wildfly .

@@ -1,7 +1,7 @@
 # git clone https://github.com/daggerok/jboss-wildfly
 # docker build -t daggerok/jboss-wildfly -f jboss-wildfly/Dockerfile .
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.2.0.Final-alpine
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.2.0.Final
+# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.2.1.Final-alpine
+# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.2.1.Final
 # docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:alpine
 # docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:latest
 # docker push daggerok/jboss-wildfly
@@ -12,14 +12,13 @@ MAINTAINER Maksim Kostromin https://github.com/daggerok/docker
 ARG JBOSS_USER_ARG="jboss-wildfly"
 ARG JBOSS_ADMIN_USER_ARG="admin"
 ARG JBOSS_ADMIN_PASSWORD_ARG="Admin.123"
-ARG JBOSS_WILDFLY_VERSION_ARG="8.2.0.Final"
-#ARG JBOSS_WILDFLY_VERSION_ARG="8.2.1.Final"
-##ARG JBOSS_WILDFLY_VERSION_ARG="9.0.0.Final"
-##ARG JBOSS_WILDFLY_VERSION_ARG="9.0.1.Final"
-###ARG JBOSS_WILDFLY_VERSION_ARG="9.0.2.Final"
-####ARG JBOSS_WILDFLY_VERSION_ARG="10.0.0.Final"
-#####ARG JBOSS_WILDFLY_VERSION_ARG="10.1.0.Final"
-######ARG JBOSS_WILDFLY_VERSION_ARG="11.0.0.Final"
+ARG JBOSS_WILDFLY_VERSION_ARG="8.2.1.Final"
+#ARG JBOSS_WILDFLY_VERSION_ARG="9.0.0.Final"
+#ARG JBOSS_WILDFLY_VERSION_ARG="9.0.1.Final"
+##ARG JBOSS_WILDFLY_VERSION_ARG="9.0.2.Final"
+###ARG JBOSS_WILDFLY_VERSION_ARG="10.0.0.Final"
+####ARG JBOSS_WILDFLY_VERSION_ARG="10.1.0.Final"
+#####ARG JBOSS_WILDFLY_VERSION_ARG="11.0.0.Final"
 ARG JBOSS_WILDFLY_FILE_ARG="wildfly-${JBOSS_WILDFLY_VERSION_ARG}"
 
 ENV JBOSS_USER=${JBOSS_USER_ARG} \
