@@ -1,0 +1,42 @@
+group: travis_lts
+sudo: required
+
+services:
+- docker
+
+env:
+  global:
+  - TERM=dumb
+  - DOCKER_USERNAME=daggerok
+  - secure: "qZo14uH7EI+KlgXuCP2rVx908Jy2kgtsGNRZGc1p7mSkQbZFZwY5Oy5ST0Lx5dOWQXBb1ezLuWaYgom/+iy/vo3fvRW0uWwohs+Us0BzN+0KfMcevRnImml2M+Ho/w10CuVdam0FcH24dvasQyYZJgBeVswvKnIujW4f2UNMFIAdoZAIywkP0Pikp0d86qFsyR09ZDT0jxodmIbYpRce2AjPpsmWxV4Cf3CQvvY6mtyNmrpjAoCEbASeeJGvV0zGiUKlvqIzcgKrgSYj5k7SoAgpm7cvnXp8dHgzhd6Zgdl6TpxlxrQJjvNcTkA4kvqP0qV9xyKsi375OvccniiA5o9GxUffjWhzmQplzIrGnABrxuZXy9m75VOzIueOssxxjyVLbu764JwHf8gbqMzqkNWRB9HxYUKJIPuqTW1CPyEMPX65lAxNt8ydlaxZeXLGwxWR6zwSmGWzM6siVgxe1w4qFRiFb0D9wi9AIZYpYYgRjmFNBLaYziCyTx8XbbJtvhq4WJiwGlsUcl5Z2FSSl+0BEAbSN1ipJOKOiwzd68tJ0TLhcDQb6P8PgJgO4qRQoEObniXeD10iFxEqRCP+24IMPpTyxOcHVPhKNvT66m0VMgWjsWWfoHmR70/F/vGepe+aljt3EL0js2Gt3eGm9e0UbPYnoZp8fNbNHNYyKZg="
+  - DOCKER_COMPOSE_VERSION=1.18.0
+
+before_install:
+  # update docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt update
+  - sudo apt -y install docker-ce
+  # update docker-compose
+  - sudo rm -rf /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose -v
+
+script:
+- docker build -t ${DOCKER_USERNAME}/jboss-wildfly .
+- >
+  if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:latest
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:alpine
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:11.0.0.Final
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:11.0.0.Final-alpine
+    docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+    docker push ${DOCKER_USERNAME}/jboss-wildfly
+    
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly-alpine:11.0.0.Final
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly-alpine
+    docker push ${DOCKER_USERNAME}/jboss-wildfly-alpine
+  fi
+  
