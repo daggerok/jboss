@@ -8,7 +8,7 @@ env:
   global:
   - TERM=dumb
   - DOCKER_USERNAME=daggerok
-  - secure: "qZo14uH7EI+KlgXuCP2rVx908Jy2kgtsGNRZGc1p7mSkQbZFZwY5Oy5ST0Lx5dOWQXBb1ezLuWaYgom/+iy/vo3fvRW0uWwohs+Us0BzN+0KfMcevRnImml2M+Ho/w10CuVdam0FcH24dvasQyYZJgBeVswvKnIujW4f2UNMFIAdoZAIywkP0Pikp0d86qFsyR09ZDT0jxodmIbYpRce2AjPpsmWxV4Cf3CQvvY6mtyNmrpjAoCEbASeeJGvV0zGiUKlvqIzcgKrgSYj5k7SoAgpm7cvnXp8dHgzhd6Zgdl6TpxlxrQJjvNcTkA4kvqP0qV9xyKsi375OvccniiA5o9GxUffjWhzmQplzIrGnABrxuZXy9m75VOzIueOssxxjyVLbu764JwHf8gbqMzqkNWRB9HxYUKJIPuqTW1CPyEMPX65lAxNt8ydlaxZeXLGwxWR6zwSmGWzM6siVgxe1w4qFRiFb0D9wi9AIZYpYYgRjmFNBLaYziCyTx8XbbJtvhq4WJiwGlsUcl5Z2FSSl+0BEAbSN1ipJOKOiwzd68tJ0TLhcDQb6P8PgJgO4qRQoEObniXeD10iFxEqRCP+24IMPpTyxOcHVPhKNvT66m0VMgWjsWWfoHmR70/F/vGepe+aljt3EL0js2Gt3eGm9e0UbPYnoZp8fNbNHNYyKZg="
+  - secure: "sEB0x6YGTyk2BOL8EzGIjWa1fLWMVumubnSEheH/sJTWn7DCmQixtT8LqIW0M42ruWOUk2wd4vpxBaDZFnKnIbnK5u7wr7Ozk+eXLStQeL2GR9phSqEfqMPCVMv/hN/qQfg1sYegzFhz241vTd1JV87ypwDEqOTqV/fe0siD39CRv9Jx1sVf5wAPJN3K0EvCQ57BdeWmcu93BIbzIxA0sCyU9NwHma7MmpkRrkSOcMUGAlR1sGt6kWLPj3i2QkMDycS9OPo74CvJA4J7qpM9//aX8TvQFecPewZHqUGfuBsCXT+p/7rTzcAlHhYx2yhGeU7GNXYkHf5Z5i5w76Een9OTJbd5h7l9KFgrxEOJZMRYAAUhChvI+Omh3aNlUclVgVSrU5xlnYShN0ChWbXy8FNGiZ96YyDUjz92AMPsvtpuNReVGkZbAT4aVcOKw33NKtFD/FLurGjhgMnHm4ygHt6HiVJr5l3q+/NITved3MLpg3axL7WPxzax7yvrxV/QPSxXZJ6aVjVYjiqjXAqRN/sYf2PoAQbtyhSE485quO0ie1oj0TVx0dNDWCOe1sICQHDIqpS65StNbWOX/wqmS4Yq322k1kYYncGJdRnrGZTurkW8zhhPw4IDPbP/TrlUF9MmrYgukY6y2lrgs0Y+dKnQTSfq+HeHs5B+YwuQ97w="
   - DOCKER_COMPOSE_VERSION=1.18.0
 
 before_install:
@@ -27,16 +27,16 @@ before_install:
 script:
 - docker build -t ${DOCKER_USERNAME}/jboss-wildfly .
 - >
-  if [ "$TRAVIS_BRANCH" == "master" ]; then
+  if [ "${TRAVIS_BRANCH}" == "master" ]; then
     docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:latest
     docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:alpine
     docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:11.0.0.Final
     docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:11.0.0.Final-alpine
-    docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-    docker push ${DOCKER_USERNAME}/jboss-wildfly
-    
-    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly-alpine:11.0.0.Final
-    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly-alpine
-    docker push ${DOCKER_USERNAME}/jboss-wildfly-alpine
+  else
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:latest
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:alpine
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:${TRAVIS_BRANCH}
+    docker tag ${DOCKER_USERNAME}/jboss-wildfly ${DOCKER_USERNAME}/jboss-wildfly:${TRAVIS_BRANCH}-alpine
   fi
-  
+- docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+- docker push ${DOCKER_USERNAME}/jboss-wildfly

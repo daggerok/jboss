@@ -1,5 +1,5 @@
 # jboss-wildfly [![Build Status](https://travis-ci.org/daggerok/jboss-wildfly.svg?branch=master)](https://travis-ci.org/daggerok/jboss-wildfly)
-JBOSS WildFly 11.0.0.Final docker image (Linux Alpine, OpenJDK 8u151)
+JBOSS WildFly 8.0.0.Final docker image (Linux Alpine, OpenJDK 8u151)
 
 **Exposed ports**:
 
