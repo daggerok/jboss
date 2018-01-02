@@ -1,5 +1,5 @@
 # jboss-wildfly [![Build Status](https://travis-ci.org/daggerok/jboss-wildfly.svg?branch=master)](https://travis-ci.org/daggerok/jboss-wildfly)
-JBOSS WildFly 11.0.0.Final docker image (Linux Alpine, OpenJDK 8u151)
+JBOSS WildFly 8.0.0.Final docker image (Linux Alpine, OpenJDK 8u151)
 
 **Exposed ports**:
 
@@ -17,16 +17,16 @@ JBOSS WildFly 11.0.0.Final docker image (Linux Alpine, OpenJDK 8u151)
 
 ```
 
-FROM daggerok/jboss-eap-7.1
+FROM daggerok/jboss-wildfly:8.0.0.Final
 ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/
 ```
 
-#### Usage with remote debug:
+#### Remote debug:
 
 ```
 
-FROM daggerok/jboss-eap-7.1
+FROM daggerok/jboss-wildfly:8.0.0.Final-alpine
 RUN echo "JAVA_OPTS=\"\$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 \"" >> ${JBOSS_HOME}/bin/standalone.conf
 EXPOSE 5005
-ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/
+COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/
 ```
