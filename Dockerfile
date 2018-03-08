@@ -30,12 +30,15 @@ RUN wget --no-check-certificate \
  && rm -rf /tmp/*
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss4-java5                                                                    #
+# FROM daggerok/jboss4-java5:v2                                                                 #
+# HEALTHCHECK --timeout=2s --retries=22 \                                                       #
+#         CMD wget -q --spider http://127.0.0.1:8080/health \                                   #
+#          || exit 1                                                                            #
 # COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
 #################################################################################################
 
 ######################################## DEBUG USAGE ############################################
-# FROM daggerok/jboss4-java5                                                                    #
+# FROM daggerok/jboss4-java5:v2                                                                 #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
 # COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
