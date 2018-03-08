@@ -30,17 +30,19 @@ RUN wget --no-check-certificate \
  && rm -rf /tmp/*
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss4-java5:v2                                                                 #
+# FROM daggerok/jboss4-java5                                                                    #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
-#         CMD wget -q --spider http://127.0.0.1:8080/health \                                   #
+#         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
 #          || exit 1                                                                            #
-# COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
+# COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/my-service.war                   #
 #################################################################################################
 
-######################################## DEBUG USAGE ############################################
-# FROM daggerok/jboss4-java5:v2                                                                 #
+############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
+# FROM daggerok/jboss4-java5                                                                    #
+# # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
+# # Multi deployments:                                                                          #
 # COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
 #################################################################################################
 
