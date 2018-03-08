@@ -17,10 +17,7 @@ ENV JBOSS_HOME="/home/jboss/jboss-${JBOSS_VERSION}"
 ENV JAVA_OPTS="$JAVA_OPTS \
 -Djboss.bind.address=0.0.0.0 \
 -Djboss.bind.address.management=0.0.0.0 \
--Djava.net.preferIPv4Stack=true \
--XX:+UnlockExperimentalVMOptions \
--XX:+UseCGroupMemoryLimitForHeap \
--XshowSettings:vm"
+-Djava.net.preferIPv4Stack=true "
 CMD /bin/bash
 ENTRYPOINT /bin/bash ${JBOSS_HOME}/bin/run.sh
 RUN wget --no-check-certificate \
@@ -42,7 +39,7 @@ RUN wget --no-check-certificate \
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
-# # Multi deployments:                                                                          #
+# # Multi builds:                                                                               #
 # COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
 #################################################################################################
 
