@@ -24,19 +24,19 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
                  && ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss4:root                                                                     #
+# FROM daggerok/jboss4                                                                          #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
-#         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
+#         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                    #
 #          || exit 1                                                                            #
-# COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/my-service.war                   #
+# COPY ./target/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war                        #
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss4:root                                                                     #
+# FROM daggerok/jboss4                                                                          #
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
 # # Multi builds:                                                                               #
-# COPY --chown=jboss target/*.war ${JBOSS_HOME}/default/deploy/                                 #
+# COPY ./target/*.war ${JBOSS_HOME}/server/default/deploy/                                      #
 #################################################################################################
 
