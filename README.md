@@ -39,8 +39,8 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 ```
 
-## JBOSS
-WildFly docker image based on Linux Alpine, OpenJDK 8u151
+## JBOSS WildFly
+based on Linux Alpine, OpenJDK 8u151
 
 tags:
 
@@ -86,7 +86,7 @@ COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/
 
 ```
 
-## JBOSS 4
+## JBOSS 4.2.3.GA
 based on `openjdk:8u151-jre-alpine3.7` image
 
 **Exposed ports**:
@@ -119,7 +119,7 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
 
-## JBOSS 4 (java 1.5)
+## JBOSS 4.2.3.GA with java 1.5 runtime
 based on `openjdk:8u151-jdk-alpine` image
 
 **Exposed ports**:
