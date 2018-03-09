@@ -1,5 +1,5 @@
-# jboss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
-JBOSS automated build for docker hub
+# JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
+automated build for docker hub
 
 ## JBOSS WildFly
 based on Linux Alpine, OpenJDK 8u151
@@ -99,7 +99,7 @@ based on `openjdk:8u151-jre-alpine3.7` image
 
 ```
 
-FROM daggerok/jboss:jboss4
+FROM daggerok/jboss:4.2.3.GA
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
@@ -111,7 +111,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
 
 ```
 
-FROM daggerok/jboss:jboss4
+FROM daggerok/jboss:4.2.3.GA
 # Remote debug:
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
@@ -121,7 +121,7 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 ```
 
 ## JBOSS 4.2.3.GA with java 1.5 runtime
-based on `openjdk:8u151-jdk-alpine` image
+based on `lwis/java5` image
 
 **Exposed ports**:
 
@@ -132,7 +132,7 @@ based on `openjdk:8u151-jdk-alpine` image
 
 ```
 
-FROM daggerok/jboss:jboss4-java5
+FROM daggerok/jboss:4.2.3.GA-java1.5
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
@@ -144,7 +144,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/default/deploy/my-service.war
 
 ```
 
-FROM daggerok/jboss:jboss4-java5
+FROM daggerok/jboss:4.2.3.GA-java1.5
 # Remote debug:
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
