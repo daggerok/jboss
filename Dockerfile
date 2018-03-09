@@ -46,11 +46,19 @@ RUN wget ${JBOSS_URL} -O "${JBOSS_USER_HOME}/${JBOSS_WILDFLY_FILE}.zip" \
  && ${JBOSS_HOME}/bin/add-user.sh ${JBOSS_ADMIN_USER} ${JBOSS_ADMIN_PASSWORD} --silent \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
-## check all apps healthy (in current example we are expecting to have apps with /ui/ and /rest-api/ contexts deployed:
-#HEALTHCHECK --interval=1s --timeout=3s --retries=30 \
-# CMD wget -q --spider http://127.0.0.1:8080/rest-api/health \
-#  && wget -q --spider http://127.0.0.1:8080/ui/ \
-#  || exit 1
-#
-## deploy apps
-#COPY ./path/to/*.war ./path/to/another/*.war ${JBOSS_HOME}/standalone/deployments/
+############################################## USAGE ################################################
+# FROM daggerok/jboss:wildfly-8.0.0.Final                                                           #
+# HEALTHCHECK --timeout=2s --retries=22 \                                                           #
+#         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                        #
+#          || exit 1                                                                                #
+# COPY --chown=jboss-wildfly ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
+#####################################################################################################
+
+################################ DEBUG | MULTI-DEPLOYMENTS USAGE ####################################
+# FROM daggerok/jboss:wildfly-8.0.0.Final                                                           #
+# # Debug:                                                                                          #
+# ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"     #
+# EXPOSE 5005                                                                                       #
+# # Multi builds:                                                                                   #
+# COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/                      #
+#####################################################################################################
