@@ -1,5 +1,13 @@
 # jboss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
-JBOSS EAP 6.4 automation build for docker hub based on `openjdk:8u151-jdk-alpine` image
+JBOSS automated build for docker hub
+
+## JBOSS EAP
+based on `openjdk:8u151-jdk-alpine` image
+
+tags:
+
+- eap-6.4
+- eap-7.1
 
 **Exposed ports**:
 
@@ -10,7 +18,7 @@ JBOSS EAP 6.4 automation build for docker hub based on `openjdk:8u151-jdk-alpine
 
 ```
 
-FROM daggerok/jboss:jboss-eap-6.4
+FROM daggerok/jboss:jboss-eap-7.1
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
@@ -22,7 +30,7 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 ```
 
-FROM daggerok/jboss:jboss-eap-6.4
+FROM daggerok/jboss:jboss-eap-7.1
 # Remote debug:
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
@@ -143,4 +151,3 @@ EXPOSE 5005
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/default/deploy/
 
 ```
-

@@ -7,9 +7,9 @@
 FROM openjdk:8u151-jdk-alpine
 MAINTAINER Maksim Kostromin https://github.com/daggerok
 
-ARG JBOSS_USER="jboss-eap-6.4"
-ARG DROPBOX_HASH_ARG="xl2io9dhc6zxw9m"
-ARG JBOSS_FILE_ARG="jboss-eap-6.4.0.zip"
+ARG JBOSS_USER="jboss-eap-7.1"
+ARG DROPBOX_HASH_ARG="fx1jnh89w9mosjs"
+ARG JBOSS_FILE_ARG="jboss-eap-7.1.0.zip"
 ARG JBOSS_ADMIN_USER_ARG="admin"
 ARG JBOSS_ADMIN_PASSWORD_ARG="Admin.123"
 
@@ -44,7 +44,7 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss:jboss-eap-6.4                                                             #
+# FROM daggerok/jboss:jboss-eap-7.1                                                             #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
 #          || exit 1                                                                            #
@@ -52,11 +52,11 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss:jboss-eap-6.4                                                             #
+# FROM daggerok/jboss:jboss-eap-7.1                                                             #
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
 # # Multi builds:                                                                               #
-# COPY --chown=jboss ./target/*.war ${JBOSS_HOME}/standalone/deployments/                       #
+# COPY --chown=jboss ./build/libs/app.ear ./target/*.war ${JBOSS_HOME}/standalone/deployments/  #
 #################################################################################################
 
