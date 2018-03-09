@@ -19,7 +19,7 @@ ENV JAVA_OPTS="$JAVA_OPTS \
 -Djboss.bind.address.management=0.0.0.0 \
 -Djava.net.preferIPv4Stack=true "
 CMD /bin/bash
-ENTRYPOINT /bin/bash ${JBOSS_HOME}/bin/run.sh
+ENTRYPOINT /bin/bash ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
 RUN wget --no-check-certificate \
              -O /tmp/jboss-${JBOSS_VERSION}.zip \
              https://sourceforge.net/projects/jboss/files/JBoss/JBoss-${JBOSS_VERSION}/jboss-${JBOSS_VERSION}.zip \
