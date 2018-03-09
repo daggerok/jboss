@@ -37,6 +37,6 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
 # # Multi builds:                                                                               #
-# COPY ./target/*.war ${JBOSS_HOME}/server/default/deploy/                                      #
+# COPY ./target/*.war ./build/libs/other.war ${JBOSS_HOME}/server/default/deploy/               #
 #################################################################################################
 
