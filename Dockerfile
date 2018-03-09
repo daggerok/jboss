@@ -1,18 +1,10 @@
-# git clone https://github.com/daggerok/jboss-wildfly
-# docker build -t daggerok/jboss-wildfly -f jboss-wildfly/Dockerfile .
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.0.0.Final-alpine
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:8.0.0.Final
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:alpine
-# docker tag daggerok/jboss-wildfly daggerok/jboss-wildfly:latest
-# docker push daggerok/jboss-wildfly
-
 FROM openjdk:8u151-jdk-alpine
-MAINTAINER Maksim Kostromin https://github.com/daggerok/docker
+MAINTAINER Maksim Kostromin https://github.com/daggerok
 
 ARG JBOSS_USER_ARG="jboss-wildfly"
 ARG JBOSS_ADMIN_USER_ARG="admin"
 ARG JBOSS_ADMIN_PASSWORD_ARG="Admin.123"
-ARG JBOSS_WILDFLY_VERSION_ARG="8.0.0.Final"
+ARG JBOSS_WILDFLY_VERSION_ARG="8.1.0.Final"
 ARG JBOSS_WILDFLY_FILE_ARG="wildfly-${JBOSS_WILDFLY_VERSION_ARG}"
 
 ENV JBOSS_USER=${JBOSS_USER_ARG} \
@@ -47,7 +39,7 @@ RUN wget ${JBOSS_URL} -O "${JBOSS_USER_HOME}/${JBOSS_WILDFLY_FILE}.zip" \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
 ############################################## USAGE ################################################
-# FROM daggerok/jboss:wildfly-8.0.0.Final                                                           #
+# FROM daggerok/jboss:wildfly-8.1.0.Final                                                           #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                           #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                        #
 #          || exit 1                                                                                #
@@ -55,7 +47,7 @@ RUN wget ${JBOSS_URL} -O "${JBOSS_USER_HOME}/${JBOSS_WILDFLY_FILE}.zip" \
 #####################################################################################################
 
 ################################ DEBUG | MULTI-DEPLOYMENTS USAGE ####################################
-# FROM daggerok/jboss:wildfly-8.0.0.Final                                                           #
+# FROM daggerok/jboss:wildfly-8.1.0.Final                                                           #
 # # Debug:                                                                                          #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"     #
 # EXPOSE 5005                                                                                       #
