@@ -24,7 +24,7 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
                  && ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss:jboss4                                                                    #
+# FROM daggerok/jboss:4.2.3.GA                                                                  #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                    #
 #          || exit 1                                                                            #
@@ -32,7 +32,7 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss:jboss4                                                                    #
+# FROM daggerok/jboss:4.2.3.GA                                                                  #
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
