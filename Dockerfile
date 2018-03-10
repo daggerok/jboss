@@ -1,9 +1,3 @@
-# git clone https://github.com/daggerok/jboss
-# docker build -t daggerok/jboss -f jboss/Dockerfile .
-# docker tag daggerok/jboss daggerok/jboss:alpine
-# docker tag daggerok/jboss daggerok/jboss:latest
-# docker push daggerok/jboss
-
 FROM openjdk:8u151-jdk-alpine
 MAINTAINER Maksim Kostromin https://github.com/daggerok
 
