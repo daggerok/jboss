@@ -48,7 +48,7 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
 #          || exit 1                                                                            #
-# COPY --chown=jboss ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war         #
+# COPY --chown=jboss-eap-6.4 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
@@ -57,6 +57,6 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
 # # Multi builds:                                                                               #
-# COPY --chown=jboss ./target/*.war ${JBOSS_HOME}/standalone/deployments/                       #
+# COPY --chown=jboss-eap-6.4 ./target/*.war ${JBOSS_HOME}/standalone/deployments/               #
 #################################################################################################
 
