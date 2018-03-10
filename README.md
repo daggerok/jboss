@@ -1,10 +1,10 @@
 # JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
-automated build for docker hub
+Automated builds for docker hub
 
 ## JBOSS WildFly
 based on Linux Alpine, OpenJDK 8u151
 
-tags:
+**tags**:
 
 - wildfly-12.0.0.Final
 - wildfly-11.0.0.Final
@@ -52,7 +52,7 @@ COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/
 ## JBOSS EAP
 based on `openjdk:8u151-jdk-alpine` image
 
-tags:
+**tags**:
 
 - eap-7.1
 - eap-6.4
@@ -88,7 +88,11 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 ```
 
 ## JBOSS 4.2.3.GA
-based on `openjdk:8u151-jre-alpine3.7` image
+
+**tags**:
+
+- 4.2.3.GA - based on `openjdk:8u151-jre-alpine3.7` image
+- 4.2.3.GA-java1.5 - based on `lwis/java5` image
 
 **Exposed ports**:
 
@@ -99,7 +103,7 @@ based on `openjdk:8u151-jre-alpine3.7` image
 
 ```
 
-FROM daggerok/jboss:4.2.3.GA
+FROM daggerok/jboss:4.2.3.GA-java1.5
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
@@ -117,38 +121,5 @@ ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,
 EXPOSE 5005
 # Multi-builds deployment:
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
-
-```
-
-## JBOSS 4.2.3.GA with java 1.5 runtime
-based on `lwis/java5` image
-
-**Exposed ports**:
-
-- 8080 - deployed apps http port
-- 8009, 8083, 8093 - who cares ports...
-
-### Usage (with healthcheck):
-
-```
-
-FROM daggerok/jboss:4.2.3.GA-java1.5
-HEALTHCHECK --timeout=2s --retries=22 \
-        CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
-         || exit 1
-ADD ./build/libs/*.war ${JBOSS_HOME}/default/deploy/my-service.war
-
-```
-
-#### Remote debug / multi-build deployment:
-
-```
-
-FROM daggerok/jboss:4.2.3.GA-java1.5
-# Remote debug:
-ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
-EXPOSE 5005
-# Multi-builds deployment:
-COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/default/deploy/
 
 ```
