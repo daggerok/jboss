@@ -11,7 +11,7 @@ RUN apt-get update -y \
  && apt-get remove openssh-client
 WORKDIR /home/jboss
 USER jboss
-EXPOSE 8080 8009 8083 8093
+EXPOSE 1009 8080 8009 8083 8093
 ENV JBOSS_VERSION="${JBOSS_VERSION_ARG}"
 ENV JBOSS_HOME="/home/jboss/jboss-${JBOSS_VERSION}"
 ENV JAVA_OPTS="$JAVA_OPTS \
