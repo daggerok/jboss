@@ -96,8 +96,11 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 **Exposed ports**:
 
-- 8080 - deployed web apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - HTTP port
+- 1009 - JNDI port
+- 8009 - AJP 1.3 Connector port
+- 8083 - RMI WebService port
+- 8093 - MBean port
 
 ### Usage (with healthcheck):
 
