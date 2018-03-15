@@ -88,7 +88,10 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 ```
 
 ## JBOSS 4.2.3.GA
-based on `openjdk:8u151-jre-alpine3.7` image
+**tags**:
+
+- 4.2.3.GA based on `openjdk:8u151-jre-alpine3.7` image
+- 4.2.3.GA-java1.5 based on `lwis/java5` image
 
 **Exposed ports**:
 
@@ -102,7 +105,7 @@ based on `openjdk:8u151-jre-alpine3.7` image
 
 ```
 
-FROM daggerok/jboss:4.2.3.GA
+FROM daggerok/jboss:4.2.2.GA-java1.5
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
@@ -123,8 +126,8 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
 
-## JBOSS 4.2.3.GA with java 1.5 runtime
-based on `lwis/java5` image
+## JBOSS 4.2.2.GA
+based on `openjdk:8u151-jre-alpine3.7` image
 
 **Exposed ports**:
 
@@ -138,11 +141,11 @@ based on `lwis/java5` image
 
 ```
 
-FROM daggerok/jboss:4.2.3.GA-java1.5
+FROM daggerok/jboss:4.2.2.GA
 HEALTHCHECK --timeout=2s --retries=22 \
-        CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
+        CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
-ADD ./build/libs/*.war ${JBOSS_HOME}/default/deploy/my-service.war
+ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
 
 ```
 
@@ -150,11 +153,11 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/default/deploy/my-service.war
 
 ```
 
-FROM daggerok/jboss:4.2.3.GA-java1.5
+FROM daggerok/jboss:4.2.2.GA
 # Remote debug:
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
 # Multi-builds deployment:
-COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/default/deploy/
+COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
