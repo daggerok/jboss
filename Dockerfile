@@ -1,6 +1,6 @@
 FROM openjdk:8u151-jre-alpine3.7
 MAINTAINER Maksim Kostromin https://github.com/daggerok
-ARG JBOSS_VERSION_ARG="4.2.3.GA"
+ARG JBOSS_VERSION_ARG="4.2.2.GA"
 ENV JBOSS_VERSION="${JBOSS_VERSION_ARG}"
 ENV JBOSS_HOME="/opt/jboss-${JBOSS_VERSION}"
 RUN apk --no-cache --update add bash curl unzip wget \
@@ -24,7 +24,7 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
                  && ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss:4.2.3.GA                                                                  #
+# FROM daggerok/jboss:4.2.2.GA                                                                  #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                    #
 #          || exit 1                                                                            #
@@ -32,7 +32,7 @@ ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss:4.2.3.GA                                                                  #
+# FROM daggerok/jboss:4.2.2.GA                                                                  #
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
