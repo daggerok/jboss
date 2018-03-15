@@ -92,8 +92,11 @@ based on `openjdk:8u151-jre-alpine3.7` image
 
 **Exposed ports**:
 
-- 8080 - deployed web apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - HTTP port
+- 1009 - JNDI port
+- 8009 - AJP 1.3 Connector port
+- 8083 - WebService port
+- 8093 - MBean port
 
 ### Usage (with healthcheck):
 
@@ -125,8 +128,11 @@ based on `lwis/java5` image
 
 **Exposed ports**:
 
-- 8080 - deployed apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - HTTP port
+- 1009 - JNDI port
+- 8009 - AJP 1.3 Connector port
+- 8083 - WebService port
+- 8093 - MBean port
 
 ### Usage (with healthcheck):
 
