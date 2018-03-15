@@ -18,7 +18,7 @@ RUN apk --no-cache --update add bash curl unzip wget \
  && unzip -d /opt /tmp/jboss-${JBOSS_VERSION}.zip \
  && apk del unzip \
  && rm -rf /var/cache/apk/* /tmp/*
-EXPOSE 8080 8009 8083 8093
+EXPOSE 1009 8080 8009 8083 8093
 CMD /bin/bash
 ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
                  && ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
