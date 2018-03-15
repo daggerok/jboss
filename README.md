@@ -125,8 +125,10 @@ based on `lwis/java5` image
 
 **Exposed ports**:
 
-- 8080 - deployed apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - deployed apps http port `jboss:service=invoker,type=http`
+- 1009 - JNDI port `jboss:service=Naming`
+- 8083 - WebService port `jboss:service=WebService`
+- 8093 - MBean port `jboss.mq:service=InvocationLayer,type=UIL2`
 
 ### Usage (with healthcheck):
 
