@@ -1,6 +1,44 @@
 # JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
 automated build for docker hub
 
+## JBOSS EAP
+based on `openjdk:8u151-jdk-alpine` image
+
+tags:
+
+- eap-7.1
+- eap-6.4
+
+**Exposed ports**:
+
+- 8080 - deployed apps http port
+- 8009, 8083, 8093 - who cares ports...
+
+### Usage (with healthcheck):
+
+```
+
+FROM daggerok/jboss:jboss-eap-7.1
+HEALTHCHECK --timeout=2s --retries=22 \
+        CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
+         || exit 1
+ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
+
+```
+
+#### Remote debug / multi-build deployment:
+
+```
+
+FROM daggerok/jboss:jboss-eap-7.1
+# Remote debug:
+ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
+EXPOSE 5005
+# Multi-builds deployment:
+COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
+
+```
+
 ## JBOSS WildFly
 based on Linux Alpine, OpenJDK 8u151
 
@@ -49,28 +87,25 @@ COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/
 
 ```
 
-## JBOSS EAP
-based on `openjdk:8u151-jdk-alpine` image
-
-tags:
-
-- eap-7.1
-- eap-6.4
+## JBOSS 6.1.0.Final
 
 **Exposed ports**:
 
-- 8080 - deployed apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - HTTP port
+- 1009 - JNDI port
+- 8009 - AJP 1.3 Connector port
+- 8083 - RMI WebService port
+- 8093 - MBean port
 
 ### Usage (with healthcheck):
 
 ```
 
-FROM daggerok/jboss:jboss-eap-7.1
+FROM daggerok/jboss:6.1.0.Final
 HEALTHCHECK --timeout=2s --retries=22 \
-        CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
+        CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
-ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
+ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
 
 ```
 
@@ -78,12 +113,12 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 ```
 
-FROM daggerok/jboss:jboss-eap-7.1
+FROM daggerok/jboss:6.1.0.Final
 # Remote debug:
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
 # Multi-builds deployment:
-COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
+COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
 
