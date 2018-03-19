@@ -38,7 +38,7 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss:jboss-eap-7.1                                                             #
+# FROM daggerok/jboss:eap-7.1                                                                   #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
 #          || exit 1                                                                            #
@@ -46,7 +46,7 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 #################################################################################################
 
 ############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss:jboss-eap-7.1                                                             #
+# FROM daggerok/jboss:eap-7.1                                                                   #
 # # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
