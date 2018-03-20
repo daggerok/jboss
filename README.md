@@ -6,6 +6,7 @@ based on `openjdk:8u151-jdk-alpine` image
 
 tags:
 
+- eap-7.1-full-ha
 - eap-7.1-full
 - eap-7.1
 - eap-6.4
@@ -19,7 +20,7 @@ tags:
 
 ```
 
-FROM daggerok/jboss:eap-7.1-full
+FROM daggerok/jboss:eap-7.1-full-ha
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
