@@ -36,7 +36,7 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
  && rm -rf ${JBOSS_USER_HOME}/${JBOSS_FILE} \
  && ${JBOSS_HOME}/bin/add-user.sh ${JBOSS_ADMIN_USER} ${JBOSS_ADMIN_PASSWORD} --silent \
  && cp -Rf ${JBOSS_HOME}/standalone/configuration/standalone.xml ${JBOSS_HOME}/standalone/configuration/standalone-deafault.xml \
- && cp -Rf ${JBOSS_HOME}/standalone/configuration/standalone-full-ha.xml ${JBOSS_HOME}/standalone/configuration/standalone-deafault.xml \
+ && cp -Rf ${JBOSS_HOME}/standalone/configuration/standalone-full-ha.xml ${JBOSS_HOME}/standalone/configuration/standalone.xml \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
 ############################################ USAGE ##############################################
