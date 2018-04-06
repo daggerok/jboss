@@ -28,7 +28,7 @@ tags:
 
 - [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
 
-- [7.1.1.Final based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
+- [7.1.1.Final](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 
 **Exposed ports**:
 
