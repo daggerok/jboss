@@ -9,7 +9,10 @@ tags:
 - [eap-7.1-full-ha](https://github.com/daggerok/jboss/blob/eap-7.1-full-ha/Dockerfile)
 - [eap-7.1-full](https://github.com/daggerok/jboss/blob/eap-7.1-full/Dockerfile)
 - [eap-7.1](https://github.com/daggerok/jboss/blob/eap-7.1/Dockerfile)
+- [eap-7.0](https://github.com/daggerok/jboss/blob/eap-7.0/Dockerfile)
 - [eap-6.4](https://github.com/daggerok/jboss/blob/eap-6.4/Dockerfile)
+- [eap-6.3](https://github.com/daggerok/jboss/blob/eap-6.3/Dockerfile)
+- [eap-6.2](https://github.com/daggerok/jboss/blob/eap-6.2/Dockerfile)
 - [eap-6.1](https://github.com/daggerok/jboss/blob/eap-6.1/Dockerfile)
 
 - [wildfly-12.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-12.0.0.Final/Dockerfile)
