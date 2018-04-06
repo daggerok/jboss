@@ -63,11 +63,14 @@ RUN wget -q ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 # COPY --chown=jboss-eap-7.1 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
 #################################################################################################
 
-############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
+########################################### DEBUG ###############################################
 # FROM daggerok/jboss:eap-7.1                                                                   #
-# # Debug:                                                                                      #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
-# # Multi builds:                                                                               #
+# COPY --chown=jboss-eap-7.1 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
+#################################################################################################
+
+################################## MULTI-DEPLOYMENTS USAGE ######################################
+# FROM daggerok/jboss:eap-7.1                                                                   #
 # COPY --chown=jboss-eap-7.1 ./app.ear ./target/*.war ${JBOSS_HOME}/standalone/deployments/     #
 #################################################################################################
