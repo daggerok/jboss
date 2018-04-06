@@ -1,7 +1,7 @@
 FROM openjdk:8u151-jdk-alpine
 MAINTAINER Maksim Kostromin https://github.com/daggerok
 
-ARG VERSION_ARG="6.3"
+ARG VERSION_ARG="7.0"
 ARG JBOSS_ADMIN_PASSWORD_ARG="Admin.123"
 ARG JBOSS_ADMIN_USER_ARG="admin"
 
@@ -56,21 +56,21 @@ RUN wget -q ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
  && echo "JAVA_OPTS=\"\$JAVA_OPTS -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0\"" >> ${JBOSS_HOME}/bin/standalone.conf
 
 ############################################ USAGE ##############################################
-# FROM daggerok/jboss:eap-6.3                                                                   #
+# FROM daggerok/jboss:eap-7.0                                                                   #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \                        #
 #          || exit 1                                                                            #
-# COPY --chown=jboss-eap-6.3 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
+# COPY --chown=jboss-eap-7.0 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
 #################################################################################################
 
 ########################################### DEBUG ###############################################
-# FROM daggerok/jboss:eap-6.3                                                                   #
+# FROM daggerok/jboss:eap-7.0                                                                   #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
-# COPY --chown=jboss-eap-6.3 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
+# COPY --chown=jboss-eap-7.0 ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war #
 #################################################################################################
 
 ################################## MULTI-DEPLOYMENTS USAGE ######################################
-# FROM daggerok/jboss:eap-6.3                                                                   #
-# COPY --chown=jboss-eap-6.3 ./app.ear ./target/*.war ${JBOSS_HOME}/standalone/deployments/     #
+# FROM daggerok/jboss:eap-7.0                                                                   #
+# COPY --chown=jboss-eap-7.0 ./app.ear ./target/*.war ${JBOSS_HOME}/standalone/deployments/     #
 #################################################################################################
