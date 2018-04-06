@@ -74,11 +74,11 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 tags:
 
-- [6.1.0.Final based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/6.1.0.Final/Dockerfile)
-- [5.1.0.GA based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/5.1.0.GA/Dockerfile)
-- [4.2.3.GA based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/4.2.3.GA/Dockerfile)
-- [4.2.3.GA-java1.5 based on `lwis/java5` image](https://github.com/daggerok/jboss/blob/4.2.3.GA-java1.5/Dockerfile)
-- [4.2.2.GA based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/4.2.2.GA/Dockerfile)
+- [6.1.0.Final](https://github.com/daggerok/jboss/blob/6.1.0.Final/Dockerfile)
+- [5.1.0.GA](https://github.com/daggerok/jboss/blob/5.1.0.GA/Dockerfile)
+- [4.2.3.GA](https://github.com/daggerok/jboss/blob/4.2.3.GA/Dockerfile)
+- [4.2.3.GA-java1.5 (based on `lwis/java5` image)](https://github.com/daggerok/jboss/blob/4.2.3.GA-java1.5/Dockerfile)
+- [4.2.2.GA](https://github.com/daggerok/jboss/blob/4.2.2.GA/Dockerfile)
 
 **Exposed ports**:
 
