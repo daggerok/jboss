@@ -1,8 +1,14 @@
 FROM openjdk:8u151-jre-alpine3.7
 MAINTAINER Maksim Kostromin https://github.com/daggerok
-ARG JBOSS_VERSION_ARG="6.1.0.Final"
-ENV JBOSS_VERSION="${JBOSS_VERSION_ARG}"
+
+ARG JBOSS_MAJOR_VERSION_ARG="7.1"
+ARG JBOSS_MINOR_VERSION_ARG="1.Final"
+
+ENV MAJOR_VERSION=${JBOSS_MAJOR_VERSION_ARG}
+ENV MINOR_VERSION=${JBOSS_MINOR_VERSION_ARG}
+ENV JBOSS_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}"
 ENV JBOSS_HOME="/opt/jboss-${JBOSS_VERSION}"
+
 RUN apk --no-cache --update add bash curl unzip wget \
  && wget --no-cookies \
          --no-check-certificate \
@@ -14,38 +20,32 @@ RUN apk --no-cache --update add bash curl unzip wget \
  && mv -f /tmp/UnlimitedJCEPolicyJDK8 ${JAVA_HOME}/lib/security \
  && wget --no-check-certificate \
          -O /tmp/jboss-${JBOSS_VERSION}.zip \
-         http://download.jboss.org/jbossas/6.1/jboss-as-distribution-${JBOSS_VERSION}.zip \
+         http://download.jboss.org/jbossas/${MAJOR_VERSION}/jboss-as-${JBOSS_VERSION}/jboss-as-${JBOSS_VERSION}.zip \
  && unzip -d /opt /tmp/jboss-${JBOSS_VERSION}.zip \
  && apk del unzip \
  && rm -rf /var/cache/apk/* /tmp/*
-# && wget --no-check-certificate \
-#         -O /tmp/apache-groovy-binary-2.4.14.zip \
-#         https://bintray.com/artifact/download/groovy/maven/apache-groovy-binary-2.4.14.zip \
-# && unzip -d /tmp/ /tmp/apache-groovy-binary-2.4.14.zip \
-# && export PATH="/tmp/groovy-2.4.14/bin:$PATH" \
-# && wget --no-check-certificate \
-#         -O /tmp/securejboss.groovy \
-#         https://raw.githubusercontent.com/pskopek/sec-script/master/script/securejboss.groovy \
-# && groovy /tmp/securejboss.groovy "$JBOSS_HOME/server/default/" \
 
 EXPOSE 1009 8080 8009 8083 8093
 CMD /bin/bash
 ENTRYPOINT chmod +x ${JBOSS_HOME}/bin/run.sh \
                  && ${JBOSS_HOME}/bin/run.sh -b 0.0.0.0
 
-############################################ USAGE ##############################################
-# FROM daggerok/jboss:6.1.0.Final                                                               #
+########################################### USAGE ###############################################
+# FROM daggerok/jboss:7.1.1.Final                                                               #
 # HEALTHCHECK --timeout=2s --retries=22 \                                                       #
 #         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \                    #
 #          || exit 1                                                                            #
-# COPY ./target/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war                        #
+# COPY ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war                        #
 #################################################################################################
 
-############################## DEBUG | MULTI-DEPLOYMENTS USAGE ##################################
-# FROM daggerok/jboss:6.1.0.Final                                                               #
-# # Debug:                                                                                      #
+########################################### DEBUG ###############################################
+# FROM daggerok/jboss:7.1.1.Final                                                               #
 # ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" #
 # EXPOSE 5005                                                                                   #
-# # Multi builds:                                                                               #
-# COPY ./target/*.war ./build/libs/other.war ${JBOSS_HOME}/server/default/deploy/               #
+# COPY ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war                       #
+#################################################################################################
+
+################################## MULTI-DEPLOYMENTS USAGE ######################################
+# FROM daggerok/jboss:7.1.1.Final                                                               #
+# COPY ./target/*.war ./build/libs/other.war ${JBOSS_HOME}/standalone/deployments/              #
 #################################################################################################

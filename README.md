@@ -28,6 +28,8 @@ tags:
 
 - [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
 
+- [7.1.1.Final based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
+
 **Exposed ports**:
 
 - 8080 - web applications
@@ -72,7 +74,6 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 tags:
 
-- [7.1.1.Final based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 - [6.1.0.Final based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/6.1.0.Final/Dockerfile)
 - [5.1.0.GA based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/5.1.0.GA/Dockerfile)
 - [4.2.3.GA based on `openjdk:8u151-jre-alpine3.7` image](https://github.com/daggerok/jboss/blob/4.2.3.GA/Dockerfile)
