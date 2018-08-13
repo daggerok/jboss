@@ -6,6 +6,7 @@ based on Linux Alpine, OpenJDK 8u151
 
 **tags**:
 
+- wildfly-13.0.0.Final
 - wildfly-12.0.0.Final
 - wildfly-11.0.0.Final
 - wildfly-10.1.0.Final
@@ -33,7 +34,7 @@ based on Linux Alpine, OpenJDK 8u151
 
 ```
 
-FROM daggerok/jboss:wildfly-12.0.0.Final
+FROM daggerok/jboss:wildfly-13.0.0.Final
 ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/
 
 ```
