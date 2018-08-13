@@ -6,6 +6,9 @@ based on `openjdk:8u151-jdk-alpine` image
 
 tags:
 
+- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
+
+- [eap-7.2 (beta)](https://github.com/daggerok/jboss/blob/eap-7.2-beta/Dockerfile)
 - [eap-7.1-full-ha](https://github.com/daggerok/jboss/blob/eap-7.1-full-ha/Dockerfile)
 - [eap-7.1-full](https://github.com/daggerok/jboss/blob/eap-7.1-full/Dockerfile)
 - [eap-7.1](https://github.com/daggerok/jboss/blob/eap-7.1/Dockerfile)
@@ -15,6 +18,7 @@ tags:
 - [eap-6.2](https://github.com/daggerok/jboss/blob/eap-6.2/Dockerfile)
 - [eap-6.1](https://github.com/daggerok/jboss/blob/eap-6.1/Dockerfile)
 
+- [wildfly-13.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-13.0.0.Final/Dockerfile)
 - [wildfly-12.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-12.0.0.Final/Dockerfile)
 - [wildfly-11.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-11.0.0.Final/Dockerfile)
 - [wildfly-10.1.0.Final](https://github.com/daggerok/jboss/blob/wildfly-10.1.0.Final/Dockerfile)
@@ -25,8 +29,6 @@ tags:
 - [wildfly-8.2.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.2.0.Final/Dockerfile)
 - [wildfly-8.1.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.1.0.Final/Dockerfile)
 - [wildfly-8.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.0.0.Final/Dockerfile)
-
-- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
 
 - [7.1.1.Final](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 
@@ -61,11 +63,11 @@ ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 ```
 
-#### multi-build deployment:
+#### multi-build deployment
 
 ```
 
-FROM daggerok/jboss:wildfly-12.0.0.Final
+FROM daggerok/jboss:wildfly-13.0.0.Final
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
 ```
@@ -113,7 +115,7 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
 
-#### multi-build deployment:
+#### multi-build deployment
 
 ```
 
