@@ -1,5 +1,5 @@
-# JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=wildfly-14.0.1.Final)](https://travis-ci.org/daggerok/jboss)
-automated build for docker hub
+# JBoss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=wildfly-15.0.0.Final)](https://travis-ci.org/daggerok/jboss)
+Automation build for docker hub
 
 ## JBoss EAP (updates)
 
@@ -10,14 +10,7 @@ automated build for docker hub
 
 ## JBoss EAP / WildFly (public)
 
-tags (based on `openjdk:8u171-jdk-alpine3.8`):
-
-- [wildfly-14.0.1.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.0.Final/Dockerfile)
 - [eap-7.2 (beta)](https://github.com/daggerok/jboss/blob/eap-7.2-beta/Dockerfile)
-- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
-
-tags (based on `openjdk:8u151-jdk-alpine`):
-
 - [eap-7.1-full-ha](https://github.com/daggerok/jboss/blob/eap-7.1-full-ha/Dockerfile)
 - [eap-7.1-full](https://github.com/daggerok/jboss/blob/eap-7.1-full/Dockerfile)
 - [eap-7.1](https://github.com/daggerok/jboss/blob/eap-7.1/Dockerfile)
@@ -27,6 +20,8 @@ tags (based on `openjdk:8u151-jdk-alpine`):
 - [eap-6.2](https://github.com/daggerok/jboss/blob/eap-6.2/Dockerfile)
 - [eap-6.1](https://github.com/daggerok/jboss/blob/eap-6.1/Dockerfile)
 
+- [wildfly-15.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-15.0.0.Final/Dockerfile)
+- [wildfly-14.0.1.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.1.Final/Dockerfile)
 - [wildfly-14.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.0.Final/Dockerfile)
 - [wildfly-13.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-13.0.0.Final/Dockerfile)
 - [wildfly-12.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-12.0.0.Final/Dockerfile)
@@ -42,11 +37,16 @@ tags (based on `openjdk:8u151-jdk-alpine`):
 
 - [7.1.1.Final](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 
-**Exposed ports**:
+**Exposing ports**:
 
 - 8080 - web applications
 - 9990 - management console
 - 8443 - https
+
+**Web administration**
+
+- username: `admin`
+- password: `Admin.123`
 
 ## JBoss EAP / WildFly Usage
 
@@ -61,7 +61,7 @@ _health-check_
 
 ```Dockerfile
 
-FROM daggerok/jboss:wildfly-14.0.1.Final
+FROM daggerok/jboss:wildfly-15.0.0.Final
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
@@ -84,7 +84,7 @@ _multi-build deployment_
 
 ```Dockerfile
 
-FROM daggerok/jboss:wildfly-14.0.1.Final-alpine
+FROM daggerok/jboss:wildfly-15.0.0.Final-alpine
 # ...
 COPY --chown=jboss-wildfly ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
@@ -148,3 +148,12 @@ FROM daggerok/jboss:4.2.2.GA
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
+
+## Base images
+
+All images tags was historically based on current openjdk docker images:
+
+- [`openjdk:8u191-jdk-alpine3.8`](https://hub.docker.com/_/openjdk)
+- [`openjdk:8u171-jdk-alpine3.8`](https://hub.docker.com/_/openjdk)
+- [`openjdk:8u151-jdk-alpine`](https://hub.docker.com/_/openjdk)
+- `...`
