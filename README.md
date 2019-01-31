@@ -1,98 +1,103 @@
-# JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
-Automated builds for docker hub
+# JBOSS [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=wildfly-14.0.0.Final)](https://travis-ci.org/daggerok/jboss)
+automated build for docker hub
 
-## JBOSS WildFly
-based on Linux Alpine, OpenJDK 8u151
+## JBoss EAP (updates)
 
-**tags**:
+- [JBoss EAP 7.1 (patched up to 7.1.5+ version)](https://github.com/daggerok/jboss-eap-7.1)
+- [JBoss EAP 7.0 (patched up to 7.0.9+ version)](https://github.com/daggerok/jboss-eap-7.0)
+- [JBoss EAP 6.4 (patched up to 6.4.21+ version)](https://github.com/daggerok/jboss-eap-6.4)
+- [JBoss EAP 6.3 (patched up to 6.3.3+ version)](https://github.com/daggerok/jboss-eap-6.3)
 
-- wildfly-13.0.0.Final
-- wildfly-12.0.0.Final
-- wildfly-11.0.0.Final
-- wildfly-10.1.0.Final
-- wildfly-10.0.0.Final
-- wildfly-9.0.2.Final
-- wildfly-9.0.1.Final
-- wildfly-9.0.0.Final
-- wildfly-8.2.0.Final
-- wildfly-8.1.0.Final
-- wildfly-8.0.0.Final
+## JBoss EAP / WildFly (public)
 
-**Exposed ports**:
+tags (based on `openjdk:8u171-jdk-alpine3.8`):
 
-- 8080 - deployed apps http port
-- 9990 - console port
-- 8443 - https port
+- [latest](https://github.com/daggerok/jboss/blob/master/Dockerfile)
+- [wildfly-14.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.0.Final/Dockerfile)
+- [eap-7.2 (beta)](https://github.com/daggerok/jboss/blob/eap-7.2-beta/Dockerfile)
 
-**Console**:
+tags (based on `openjdk:8u151-jdk-alpine`):
 
-- url: http://127.0.0.1:9990/console
-- user: admin
-- password: Admin.123
+- [eap-7.1-full-ha](https://github.com/daggerok/jboss/blob/eap-7.1-full-ha/Dockerfile)
+- [eap-7.1-full](https://github.com/daggerok/jboss/blob/eap-7.1-full/Dockerfile)
+- [eap-7.1](https://github.com/daggerok/jboss/blob/eap-7.1/Dockerfile)
+- [eap-7.0](https://github.com/daggerok/jboss/blob/eap-7.0/Dockerfile)
+- [eap-6.4](https://github.com/daggerok/jboss/blob/eap-6.4/Dockerfile)
+- [eap-6.3](https://github.com/daggerok/jboss/blob/eap-6.3/Dockerfile)
+- [eap-6.2](https://github.com/daggerok/jboss/blob/eap-6.2/Dockerfile)
+- [eap-6.1](https://github.com/daggerok/jboss/blob/eap-6.1/Dockerfile)
 
-### Usage:
+- [wildfly-13.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-13.0.0.Final/Dockerfile)
+- [wildfly-12.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-12.0.0.Final/Dockerfile)
+- [wildfly-11.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-11.0.0.Final/Dockerfile)
+- [wildfly-10.1.0.Final](https://github.com/daggerok/jboss/blob/wildfly-10.1.0.Final/Dockerfile)
+- [wildfly-10.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-10.0.0.Final/Dockerfile)
+- [wildfly-9.0.2.Final](https://github.com/daggerok/jboss/blob/wildfly-9.0.2.Final/Dockerfile)
+- [wildfly-9.0.1.Final](https://github.com/daggerok/jboss/blob/wildfly-9.0.1.Final/Dockerfile)
+- [wildfly-9.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-9.0.0.Final/Dockerfile)
+- [wildfly-8.2.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.2.0.Final/Dockerfile)
+- [wildfly-8.1.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.1.0.Final/Dockerfile)
+- [wildfly-8.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-8.0.0.Final/Dockerfile)
 
-```
-
-FROM daggerok/jboss:wildfly-13.0.0.Final
-ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/
-
-```
-
-#### Remote debug:
-
-```
-
-FROM daggerok/jboss:wildfly-8.0.0.Final-alpine
-RUN echo "JAVA_OPTS=\"\$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 \"" >> ${JBOSS_HOME}/bin/standalone.conf
-EXPOSE 5005
-COPY ./build/libs/*.war ./target/*.ear ${JBOSS_HOME}/standalone/deployments/
-
-```
-
-## JBOSS EAP
-based on `openjdk:8u151-jdk-alpine` image
-
-**tags**:
-
-- eap-7.1
-- eap-6.4
+- [7.1.1.Final](https://github.com/daggerok/jboss/blob/7.1.1.Final/Dockerfile)
 
 **Exposed ports**:
 
-- 8080 - deployed apps http port
-- 8009, 8083, 8093 - who cares ports...
+- 8080 - web applications
+- 9990 - management console
+- 8443 - https
 
-### Usage (with healthcheck):
+## JBoss EAP / WildFly Usage
+
+```Dockerfile
+
+FROM daggerok/jboss:eap-7.1
+COPY --chown=jboss-eap-7.1 ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
 
 ```
 
-FROM daggerok/jboss:jboss-eap-7.1
+_health-check_
+
+```Dockerfile
+
+FROM daggerok/jboss:wildfly-14.0.0.Final
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
-ADD ./build/libs/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
+# ...
 
 ```
 
-#### Remote debug / multi-build deployment:
+_remote debug_
 
-```
+```Dockerfile
 
-FROM daggerok/jboss:jboss-eap-7.1
-# Remote debug:
+FROM daggerok/jboss:eap-6.4
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
-# Multi-builds deployment:
-COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
+# ...
 
 ```
 
-## JBOSS 4.2.3.GA
-**tags**:
+_multi-build deployment_
 
-- 4.2.3.GA based on `openjdk:8u151-jre-alpine3.7` image
-- 4.2.3.GA-java1.5 based on `lwis/java5` image
+```Dockerfile
+
+FROM daggerok/jboss:wildfly-14.0.0.Final-alpine
+# ...
+COPY --chown=jboss-wildfly ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
+
+```
+
+## JBoss AS (DEPRECATED)
+
+tags (based on `openjdk:8u151-jdk-alpine`):
+
+- [6.1.0.Final](https://github.com/daggerok/jboss/blob/6.1.0.Final/Dockerfile)
+- [5.1.0.GA](https://github.com/daggerok/jboss/blob/5.1.0.GA/Dockerfile)
+- [4.2.3.GA](https://github.com/daggerok/jboss/blob/4.2.3.GA/Dockerfile)
+- [4.2.3.GA-java1.5](https://github.com/daggerok/jboss/blob/4.2.3.GA-java1.5/Dockerfile) (based on `lwis/java5`)
+- [4.2.2.GA](https://github.com/daggerok/jboss/blob/4.2.2.GA/Dockerfile)
 
 **Exposed ports**:
 
@@ -102,63 +107,43 @@ COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 - 8083 - RMI WebService port
 - 8093 - MBean port
 
-### Usage (with healthcheck):
+### JBoss AS Usage 
 
-```
+```Dockerfile
 
-FROM daggerok/jboss:4.2.2.GA-java1.5
-HEALTHCHECK --timeout=2s --retries=22 \
-        CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
-         || exit 1
+FROM daggerok/jboss:5.1.0.Final
 ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
 
 ```
 
-#### Remote debug / multi-build deployment:
+_health-check_
 
-```
+```Dockerfile
 
-FROM daggerok/jboss:4.2.3.GA
-# Remote debug:
-ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
-EXPOSE 5005
-# Multi-builds deployment:
-COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
-
-```
-
-## JBOSS 4.2.2.GA
-based on `openjdk:8u151-jre-alpine3.7` image
-
-**Exposed ports**:
-
-- 8080 - HTTP port
-- 1009 - JNDI port
-- 8009 - AJP 1.3 Connector port
-- 8083 - RMI WebService port
-- 8093 - MBean port
-
-### Usage (with healthcheck):
-
-```
-
-FROM daggerok/jboss:4.2.2.GA
+FROM daggerok/jboss:5.1.0.Final
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/api/health \
          || exit 1
-ADD ./build/libs/*.war ${JBOSS_HOME}/server/default/deploy/my-service.war
+# ...
 
 ```
 
-#### Remote debug / multi-build deployment:
+_remote debug_
 
-```
+```Dockerfile
 
-FROM daggerok/jboss:4.2.2.GA
-# Remote debug:
+FROM daggerok/jboss:4.2.3.GA-java1.5
 ENV JAVA_OPTS="$JAVA_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 "
 EXPOSE 5005
-# Multi-builds deployment:
+# ...
+
+```
+
+_multi-build deployment_
+
+```Dockerfile
+
+FROM daggerok/jboss:4.2.2.GA
 COPY ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/server/default/deploy/
 
 ```
