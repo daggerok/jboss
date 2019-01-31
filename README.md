@@ -1,4 +1,4 @@
-# JBoss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=wildfly-15.0.0.Final)](https://travis-ci.org/daggerok/jboss)
+# JBoss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=wildfly-15.0.1.Final)](https://travis-ci.org/daggerok/jboss)
 Automation build for docker hub
 
 ## JBoss EAP (updates)
@@ -20,6 +20,7 @@ Automation build for docker hub
 - [eap-6.2](https://github.com/daggerok/jboss/blob/eap-6.2/Dockerfile)
 - [eap-6.1](https://github.com/daggerok/jboss/blob/eap-6.1/Dockerfile)
 
+- [wildfly-15.0.1.Final](https://github.com/daggerok/jboss/blob/wildfly-15.0.1.Final/Dockerfile)
 - [wildfly-15.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-15.0.0.Final/Dockerfile)
 - [wildfly-14.0.1.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.1.Final/Dockerfile)
 - [wildfly-14.0.0.Final](https://github.com/daggerok/jboss/blob/wildfly-14.0.0.Final/Dockerfile)
@@ -61,7 +62,7 @@ _health-check_
 
 ```Dockerfile
 
-FROM daggerok/jboss:wildfly-15.0.0.Final
+FROM daggerok/jboss:wildfly-15.0.1.Final
 HEALTHCHECK --timeout=2s --retries=22 \
         CMD wget -q --spider http://127.0.0.1:8080/my-service/health \
          || exit 1
@@ -84,7 +85,7 @@ _multi-build deployment_
 
 ```Dockerfile
 
-FROM daggerok/jboss:wildfly-15.0.0.Final-alpine
+FROM daggerok/jboss:wildfly-15.0.1.Final-alpine
 # ...
 COPY --chown=jboss-wildfly ./build/libs/*.war ./target/*.war ${JBOSS_HOME}/standalone/deployments/
 
