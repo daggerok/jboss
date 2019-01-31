@@ -1,4 +1,4 @@
-# JBoss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=eap-7.2)](https://travis-ci.org/daggerok/jboss)
+# JBoss [![Build Status](https://travis-ci.org/daggerok/jboss.svg?branch=master)](https://travis-ci.org/daggerok/jboss)
 Automation build for docker hub
 
 ## JBoss EAP (updates)
